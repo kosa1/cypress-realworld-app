@@ -253,17 +253,6 @@
       "isDeleted": false,
       "createdAt": "2024-01-26T14:01:01.815Z",
       "modifiedAt": "2024-03-07T08:44:31.174Z"
-    },
-    {
-      "id": "LRhE5TspY",
-      "uuid": "feade228-835e-405e-a06c-c69d26b0c0b1",
-      "userId": "uBmeaz5pX",
-      "bankName": "Mbank",
-      "accountNumber": "939999330",
-      "routingNumber": "193049304",
-      "isDeleted": false,
-      "createdAt": "2025-01-21T05:39:36.070Z",
-      "modifiedAt": "2025-01-21T05:39:36.070Z"
     }
   ],
   "transactions": [

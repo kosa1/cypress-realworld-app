@@ -12,11 +12,11 @@ export class LoginPage {
     }
   
     clickLogin(): void {
-      cy.get("#login-button").click();
+      cy.get("button.SignInForm-submit").click();
     }
   
     checkDashboardIsVisible(): void {
-      cy.get("#dashboard").should("be.visible");
+      cy.get("header.MuiPaper-root").should("be.visible");
     }
   }
   

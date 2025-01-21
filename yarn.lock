@@ -4070,6 +4070,11 @@
   resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.12.tgz#6b2c510a7ad7039e98e7b8d3d6598f4359e5c080"
   integrity sha512-vt+kDhq/M2ayberEtJcIN/hxXy1Pk+59g2FV/ZQceeaTyCtCucjL2Q7FXlFjtWn4n15KCr1NE2lNNFhp0lEThw==
 
+"@types/cypress-cucumber-preprocessor@^4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@types/cypress-cucumber-preprocessor/-/cypress-cucumber-preprocessor-4.0.5.tgz#5c4d791e9b1f5928bcf179a496538193cb4298b4"
+  integrity sha512-5+eM+RWNOW7X9JMQ4auux/HxTWxBK+Mz2wStEnnbuJr0HRLqCNJDUDvkeLtob8X74uA3L0bCFNyC2WotfJtM6Q==
+
 "@types/deep-eql@*":
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/@types/deep-eql/-/deep-eql-4.0.2.tgz#334311971d3a07121e7eb91b684a605e7eea9cbd"
@@ -4164,7 +4169,7 @@
   dependencies:
     "@types/express" "*"
 
-"@types/express-unless@*", "@types/express-unless@^2.0.3":
+"@types/express-unless@*":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/express-unless/-/express-unless-2.0.3.tgz#d4c9e123bf0be98fdbe09f2059babfd3c7bbbcf4"
   integrity sha512-iJbM7nsyBgnxCrCe7VjWIi4nyyhlaKUl7jxeHDpK+KXk3sYrUZViMkgFv9qSZmxDleB8dfpQR9gK5MGNyM/M6w==

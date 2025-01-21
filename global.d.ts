@@ -3,7 +3,10 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 declare global {
-  const Given: typeof Given;
-  const When: typeof When;
-  const Then: typeof Then;
+  const Given: any;
+  const When: any;
+  const Then: any;
 }
+
+export {};
+
