@@ -17,6 +17,10 @@ export class LoginPage {
   
     checkDashboardIsVisible(): void {
       cy.get("header.MuiPaper-root").should("be.visible");
+      cy.url().then(currentUrl => {
+        expect(currentUrl).to.eq('http://localhost:3000/');
+      })
+      cy.url().should('eq', 'http://localhost:3000/');
     }
   }
   

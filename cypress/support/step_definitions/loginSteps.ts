@@ -20,3 +20,10 @@ Then("I should see the dashboard", () => {
   loginPage.checkDashboardIsVisible();
 });
 
+Given('I log in using the API with username {string} and password {string}', (username: string, password: string) => {
+  cy.loginApi(username, password); 
+});
+
+When('I open the dashboard page', () => {
+  cy.visit('/'); 
+});

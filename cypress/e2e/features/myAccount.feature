@@ -24,7 +24,7 @@ Feature: My Account Module
       | email        | Bob.doe@gmail.com |
       | phoneNumber  | 48123456789       |
     And a "checkAuth" request should be sent with status code 200
-@only
+    
   Scenario: Fill in invalid data and save the form
     When I navigate to the "My Account" module
     And I fill in the following invalid data:
