@@ -1,7 +1,7 @@
 Feature: Home module payment notifications overview
 
   Background:
-    Given I am logged in as "Meda9" user with "s3cret" password
+    Given I am logged in as "<username>" user with "s3cret" password
 
   Scenario: Count all payments and categorize into incomes and expenses
     When I fetch all available payments

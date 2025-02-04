@@ -20,6 +20,10 @@ export default defineConfig({
         })
       );
       return config;
-    },
-  },  
+    }
+  }, 
+  env: {
+    USERNAME: "Timmothy_OConnell89",
+    PASSWORD: "s3cret"
+  } 
 });

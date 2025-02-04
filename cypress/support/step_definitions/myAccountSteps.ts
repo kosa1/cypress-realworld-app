@@ -8,8 +8,10 @@ const homePage = new HomePage();
 const myAccountPage = new MyAccountPage();
 
 Given("I am logged in as {string} user with {string} password", (user: string, password: string) => {
+    const login = Cypress.env('USERNAME') || user;
+
     loginPage.visit();
-    loginPage.fillUsername(user);
+    loginPage.fillUsername(login);
     loginPage.fillPassword(password);
     loginPage.clickLogin();
     loginPage.checkDashboardIsVisible();
