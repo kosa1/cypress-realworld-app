@@ -1,6 +1,7 @@
 import { MyAccountPage } from "./myAccountPage";
 import { BankAccountsPage } from "./bankAccountsPage";
 import { Notifications } from "./notificationsPage";
+import { stringify } from "querystring";
 
 type PaymentNotification = {
     id: string,
@@ -85,17 +86,17 @@ export class HomePage {
     }
 
     getAllPaymentsAmountFromNotifications(): void {
-         this.getAllPaymentNotifications().then((itemsArray) => {
+        this.getAllPaymentNotifications().then((itemsArray) => {
             cy.log(`Pobrano ${itemsArray.length} transakcji.`);
             itemsArray.forEach(({ id, amount }) => {
                 cy.log(`Transaction ID: ${id}, Amount: ${amount}`);
             });
         });
-        
+
     }
 
     calculateAllPaymentsFromNotifications(): void {
-         this.getAllPaymentNotifications().then((itemsArray) => {
+        this.getAllPaymentNotifications().then((itemsArray) => {
             cy.log(`Obliczam sumę dla ${itemsArray.length} transakcji.`);
             const incomes: string[] = [];
             const expenses: string[] = [];
@@ -122,4 +123,36 @@ export class HomePage {
 
         });
     }
+
+    selectAmountRange(min: string, max: string): void {
+        cy.get('[data-test="transaction-list-filter-amount-range-button"]').click({ force: true });
+    
+        function adjustSlider(startValue: number, targetValue: number, step: number, isMinSlider: boolean): void {
+            cy.get('.MuiSlider-rail').click(startValue, 2, { force: true });
+    
+            cy.get('[data-test="transaction-list-filter-amount-range-text"]').then(rangeAmountText => {
+                const match = rangeAmountText.text().match(/\$(\d{1,3}(?:,\d{3})*)\s-\s\$(\d{1,3}(?:,\d{3})*)/);
+                if (!match) return;
+    
+                const minValue = parseInt(match[1].replace(/,/g, ''), 10);
+                const maxValue = parseInt(match[2].replace(/,/g, ''), 10);
+    
+                if (isMinSlider && minValue !== targetValue) {
+                    adjustSlider(startValue + step, targetValue, step, isMinSlider); // Rekurencyjne przesuwanie lewego suwaka
+                } else if (!isMinSlider && maxValue !== targetValue) {
+                    adjustSlider(startValue + step, targetValue, step, isMinSlider); // Rekurencyjne przesuwanie prawego suwaka
+                }
+            });
+        }
+    
+        // Ustawienie lewego suwaka na 100 (przesuwa w prawo)
+        adjustSlider(10, 100, 1, true);
+    
+        // Ustawienie prawego suwaka na 200 (przesuwa w lewo)
+        adjustSlider(110, 200, -1, false);
+    
+        // Sprawdzenie końcowego zakresu
+        cy.get('[data-test="transaction-list-filter-amount-range-text"]').should('contain.text', `Amount Range: ${min} - ${max}`);
+    }
+    
 }
