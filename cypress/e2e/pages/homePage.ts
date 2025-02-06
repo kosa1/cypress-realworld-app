@@ -146,13 +146,13 @@ export class HomePage {
         }
     
         // Ustawienie lewego suwaka na 100 (przesuwa w prawo)
-        adjustSlider(10, 100, 1, true);
+        adjustSlider(10, parseInt(min), 1, true);
     
         // Ustawienie prawego suwaka na 200 (przesuwa w lewo)
-        adjustSlider(110, 200, -1, false);
+        adjustSlider(110, parseInt(max), -1, false);
     
         // Sprawdzenie końcowego zakresu
-        cy.get('[data-test="transaction-list-filter-amount-range-text"]').should('contain.text', `Amount Range: ${min} - ${max}`);
+        cy.get('[data-test="transaction-list-filter-amount-range-text"]').should('contain.text', `Amount Range: $${min} - $${max}`);
     }
     
 }
