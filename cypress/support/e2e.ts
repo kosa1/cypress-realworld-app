@@ -15,3 +15,5 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import { registerCommand } from 'cypress-wait-for-stable-dom'
+registerCommand()

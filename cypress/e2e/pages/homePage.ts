@@ -1,3 +1,4 @@
+/// <reference types="cypress-wait-for-stable-dom" />
 import { MyAccountPage } from "./myAccountPage";
 import { BankAccountsPage } from "./bankAccountsPage";
 import { Notifications } from "./notificationsPage";
@@ -55,6 +56,7 @@ export class HomePage {
                 });
             }).then(() => {
                 cy.wait(500);
+
                 return cy.get(listSelector).then(($list) => {
                     const listElement = $list[0];
                     const previousScrollTop = listElement.scrollTop;
@@ -85,14 +87,13 @@ export class HomePage {
         }
     }
 
-    getAllPaymentsAmountFromNotifications(): void {
+    printAllPaymentsAmountFromNotifications(): void {
         this.getAllPaymentNotifications().then((itemsArray) => {
             cy.log(`Pobrano ${itemsArray.length} transakcji.`);
             itemsArray.forEach(({ id, amount }) => {
                 cy.log(`Transaction ID: ${id}, Amount: ${amount}`);
             });
         });
-
     }
 
     calculateAllPaymentsFromNotifications(): void {
@@ -125,18 +126,21 @@ export class HomePage {
     }
 
     selectAmountRange(min: string, max: string): void {
-        cy.get('[data-test="transaction-list-filter-amount-range-button"]').click({ force: true });
-    
+
+        cy.get('[data-test="transaction-list-filter-amount-range-button"]').should('be.visible').click({ force: true });
+
+
         function adjustSlider(startValue: number, targetValue: number, step: number, isMinSlider: boolean): void {
             cy.get('.MuiSlider-rail').click(startValue, 2, { force: true });
-    
+            cy.get('.MainLayout-content').waitForStableDOM({ pollInterval: 300, timeout: 5000 });
+
             cy.get('[data-test="transaction-list-filter-amount-range-text"]').then(rangeAmountText => {
                 const match = rangeAmountText.text().match(/\$(\d{1,3}(?:,\d{3})*)\s-\s\$(\d{1,3}(?:,\d{3})*)/);
                 if (!match) return;
-    
+
                 const minValue = parseInt(match[1].replace(/,/g, ''), 10);
                 const maxValue = parseInt(match[2].replace(/,/g, ''), 10);
-    
+
                 if (isMinSlider && minValue !== targetValue) {
                     adjustSlider(startValue + step, targetValue, step, isMinSlider); // Rekurencyjne przesuwanie lewego suwaka
                 } else if (!isMinSlider && maxValue !== targetValue) {
@@ -144,15 +148,27 @@ export class HomePage {
                 }
             });
         }
-    
+
         // Ustawienie lewego suwaka na 100 (przesuwa w prawo)
         adjustSlider(10, parseInt(min), 1, true);
-    
+
         // Ustawienie prawego suwaka na 200 (przesuwa w lewo)
         adjustSlider(110, parseInt(max), -1, false);
-    
-        // Sprawdzenie końcowego zakresu
+
         cy.get('[data-test="transaction-list-filter-amount-range-text"]').should('contain.text', `Amount Range: $${min} - $${max}`);
+
+        cy.get('#amount-range-popover').then($el => {
+            $el.remove();
+        });
     }
-    
+
+    assertPaymentNotificationinSelectedRange(min: string, max: string) {
+        this.getAllPaymentNotifications().then((itemsArray) => {
+            itemsArray.forEach(({ id, amount }) => {
+                const value = amount.replace(/[^0-9.]/g, "");
+                expect(parseFloat(value)).to.be.within(parseFloat(min), parseFloat(max));
+            });
+        });
+    }
+
 }

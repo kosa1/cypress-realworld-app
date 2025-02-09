@@ -6910,6 +6910,11 @@ cypress-cucumber-preprocessor@^4.3.1:
     minimist "^1.2.5"
     through "^2.3.8"
 
+cypress-wait-for-stable-dom@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/cypress-wait-for-stable-dom/-/cypress-wait-for-stable-dom-0.1.0.tgz#8e16f9f61c67d798cfc61c6369279806da17afb7"
+  integrity sha512-iVJc6CDzlu1xUnTcZph+zbkOlImaDelpvRv4G+3naugvjkF6b9EFpDmRCC/16xL1pqpkFq4rFyfhuNw4C3PQjw==
+
 cypress@^14.0.0:
   version "14.0.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-14.0.0.tgz#a71cb0a243a0bfeb97b6973ab9c5291ca5288e93"

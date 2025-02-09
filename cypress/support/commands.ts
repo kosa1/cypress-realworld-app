@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 import './commands'
+import 'cypress-wait-for-stable-dom';
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
