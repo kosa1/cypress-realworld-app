@@ -1,0 +1,40 @@
+name: "Run Cypress BDD Tests"
+
+on:
+  workflow_dispatch:  # Uruchamianie ręczne
+  push:
+    branches:
+      - new_cypress_tests  # Uruchamiaj testy tylko na tej gałęzi
+
+jobs:
+  cypress-bdd-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node-22.13.0-chrome-132.0.6834.83-1-ff-134.0.1-edge-131.0.2903.147-1
+      options: --user 1001
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4  # Pobiera kod repozytorium
+
+      - name: Set up Yarn
+        run: corepack enable && yarn --version  # Upewnia się, że Yarn jest dostępny
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile  # Instalacja zależności (bez modyfikowania `yarn.lock`)
+
+      - name: Run Cypress BDD Tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: ""  # Nie uruchamia serwera, aplikacja działa już pod adresem URL
+          wait-on: "http://localhost:3000"  # Czeka na dostępność aplikacji
+          wait-on-timeout: 60  # Czeka maksymalnie 60 sekund
+          browser: chrome
+          record: false  # Wysyła wyniki do Cypress Dashboard (opcjonalnie)
+          spec: "cypress/e2e/**/*.feature"  # Testy w formacie .feature (BDD)
+          config-file: cypress.config.ts  # Plik konfiguracyjny Cypressa
+
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}  # ID projektu Cypress (opcjonalnie)
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  # Klucz do raportowania testów (opcjonalnie)
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
