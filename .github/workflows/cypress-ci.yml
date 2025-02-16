@@ -3,10 +3,7 @@ name: Cypress Tests
 on:
   push:
     branches:
-      - main  # Uruchamiaj testy po pushu na gałąź main
-  pull_request:
-    branches:
-      - main  # Uruchamiaj testy dla pull requestów do gałęzi main
+      - new_cypress_tests  # Uruchamiaj testy po pushu na gałąź main
 
 jobs:
   cypress-run:
