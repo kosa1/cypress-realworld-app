@@ -40,4 +40,26 @@ jobs:
           start: ""  # Nie uruchamia serwera, aplikacja działa już pod adresem URL
           wait-on: "http://localhost:3000"  # Czeka na dostępność aplikacji
           wait-on-timeout: 90  # Wydłużony timeout do 90 sekund, aby uniknąć błędów
-          bro
+          browser: chrome
+          record: false  # Nie wysyła wyników do Cypress Dashboard
+          spec: "cypress/e2e/**/*.feature"  # Testy w formacie .feature (BDD)
+          config-file: cypress.config.ts  # Plik konfiguracyjny Cypressa
+
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}  # ID projektu Cypress (opcjonalnie)
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  # Klucz do raportowania testów (opcjonalnie)
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Cypress screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload Cypress videos on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
