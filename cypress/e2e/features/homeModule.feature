@@ -9,7 +9,7 @@ Feature: Home module payment notifications overview
     And I should see the number of income payments
     And I should see the number of expense payments
 
-@only
+
 Scenario: Filtering payments by amount range
     When I set amount range from "100" to "300"
     Then I should see the number of payments in the amount range

@@ -11,6 +11,41 @@ type PaymentNotification = {
 
 export class HomePage {
     private paymentNotifications?: PaymentNotification[];
+    private balanceSelector = "[data-test='sidenav-user-balance']";
+    private balance: number = 0;
+
+    /**
+   * Metoda aktualizuje wartość balance na podstawie aktualnego stanu w UI
+   */
+    // updateBalance(): Cypress.Chainable {
+    //     return cy.get(this.balanceSelector).invoke('text').then($text => {
+    //         this.balance = parseFloat($text.trim().replace('$', ''));
+    //     });
+    // }
+
+    updateBalance(): Cypress.Chainable {
+        return cy.get(this.balanceSelector).invoke('text').then($text => {
+            this.balance = parseFloat($text.trim().replace('$', ''));
+        });
+    }
+
+
+    /**
+    * Metoda zwracająca aktualnie zapisane saldo.
+    * Jeśli potrzebujesz aktualnej wartości, użyj `updateBalance()` przed pobraniem.
+    */
+    getStoredBalance(): number {
+        return this.balance;
+    }
+
+    calculateBalanceAfterTransfer(amount: number): void {
+        const result = this.balance - amount;
+
+        this.updateBalance().then(() => {
+            expect(result).is.eq(this.getStoredBalance());
+        })
+
+    }
 
     goToHome(): HomePage {
         cy.contains("Home").click();
