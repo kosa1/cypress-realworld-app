@@ -41,7 +41,7 @@
       "phoneNumber": "48123456789",
       "avatar": "https://avatars.dicebear.com/api/human/Y2mhywsOQp.svg",
       "defaultPrivacyLevel": "public",
-      "balance": 15692,
+      "balance": 15492,
       "createdAt": "2024-06-04T06:14:40.791Z",
       "modifiedAt": "2025-01-27T03:06:55.527Z"
     },
@@ -56,7 +56,7 @@
       "phoneNumber": "838-592-0442",
       "avatar": "https://avatars.dicebear.com/api/human/lvwQ6T9qYx.svg",
       "defaultPrivacyLevel": "public",
-      "balance": 21172,
+      "balance": 21372,
       "createdAt": "2024-05-06T10:38:03.846Z",
       "modifiedAt": "2025-01-26T16:37:50.961Z"
     },
@@ -10167,6 +10167,30 @@
       "status": "complete",
       "createdAt": "2025-02-16T09:49:21.732Z",
       "modifiedAt": "2025-02-16T09:49:21.732Z"
+    },
+    {
+      "id": "fVeDQQk3k",
+      "uuid": "a92f4ca4-d174-447a-bc98-eabe74ceaa54",
+      "amount": 100,
+      "description": "This is demo Note!",
+      "receiverId": "lvwQ6T9qYx",
+      "senderId": "Y2mhywsOQp",
+      "privacyLevel": "public",
+      "status": "complete",
+      "createdAt": "2025-02-16T09:55:09.003Z",
+      "modifiedAt": "2025-02-16T09:55:09.003Z"
+    },
+    {
+      "id": "HtJod8ZKy",
+      "uuid": "c51eb104-7c06-4e08-b10f-a47ded643147",
+      "amount": 100,
+      "description": "This is demo Note!",
+      "receiverId": "lvwQ6T9qYx",
+      "senderId": "Y2mhywsOQp",
+      "privacyLevel": "public",
+      "status": "complete",
+      "createdAt": "2025-02-16T09:56:23.785Z",
+      "modifiedAt": "2025-02-16T09:56:23.785Z"
     }
   ],
   "likes": [
@@ -11003,6 +11027,26 @@
       "isRead": false,
       "createdAt": "2025-02-16T09:49:21.748Z",
       "modifiedAt": "2025-02-16T09:49:21.748Z"
+    },
+    {
+      "id": "Ivc7r-msvC",
+      "uuid": "18429a4b-63b0-4b85-a0e7-5a248a51674a",
+      "userId": "lvwQ6T9qYx",
+      "transactionId": "fVeDQQk3k",
+      "status": "received",
+      "isRead": false,
+      "createdAt": "2025-02-16T09:55:09.022Z",
+      "modifiedAt": "2025-02-16T09:55:09.022Z"
+    },
+    {
+      "id": "BLy-2qk1iO",
+      "uuid": "caa16d38-70b0-4369-acc8-b63d685049fb",
+      "userId": "lvwQ6T9qYx",
+      "transactionId": "HtJod8ZKy",
+      "status": "received",
+      "isRead": false,
+      "createdAt": "2025-02-16T09:56:23.811Z",
+      "modifiedAt": "2025-02-16T09:56:23.811Z"
     }
   ],
   "banktransfers": [

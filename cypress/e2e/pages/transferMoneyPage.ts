@@ -49,7 +49,7 @@ export class TransferMoneyPage {
 
     successMessageDisplayed(): void {
         cy.get(this.transtactionSuccessMessageSelector).should('be.visible');
-        cy.get(this.transtactionSuccessMessageSelector).contains('Transaction Submitted!');
+        cy.get(this.transtactionSuccessMessageSelector).should('contain','Transaction Submitted!');
 
     }
 }

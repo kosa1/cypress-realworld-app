@@ -54,24 +54,15 @@ Cypress.Commands.add('loginApi', (login, password) => {
 
 })
 
-
-
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
 declare global {
     namespace Cypress {
         interface Chainable {
+            /**
+        * Custom command to log in via API
+        * @param username - The username for login
+        * @param password - The password for login
+        */
             loginApi(login: string, password: string): Chainable<void>
-            setLocalStorage(key: string, value: string): Chainable<void>
         }
     }
 }
