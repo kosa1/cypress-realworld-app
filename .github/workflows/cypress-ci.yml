@@ -20,6 +20,17 @@ jobs:
       - name: Set up Yarn
         run: yarn set version stable # Upewnia się, że Yarn jest dostępny
 
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install missing peer dependencies
+        run: yarn add -D @babel/preset-env babel-loader esbuild
+
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
 
@@ -28,13 +39,5 @@ jobs:
         with:
           start: ""  # Nie uruchamia serwera, aplikacja działa już pod adresem URL
           wait-on: "http://localhost:3000"  # Czeka na dostępność aplikacji
-          wait-on-timeout: 60  # Czeka maksymalnie 60 sekund
-          browser: chrome
-          record: false  # Wysyła wyniki do Cypress Dashboard (opcjonalnie)
-          spec: "cypress/e2e/**/*.feature"  # Testy w formacie .feature (BDD)
-          config-file: cypress.config.ts  # Plik konfiguracyjny Cypressa
-
-        env:
-          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}  # ID projektu Cypress (opcjonalnie)
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}  # Klucz do raportowania testów (opcjonalnie)
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          wait-on-timeout: 90  # Wydłużony timeout do 90 sekund, aby uniknąć błędów
+          bro
