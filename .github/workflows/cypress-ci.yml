@@ -1,0 +1,41 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - new_cypress_tests  # Uruchamiaj testy po pushu na gałąź main
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest  # Użyj najnowszej wersji Ubuntu
+
+    steps:
+      # Krok 1: Pobierz kod z repozytorium
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Krok 2: Skonfiguruj Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'  # Użyj Node.js w wersji 18
+          cache: 'yarn'       # Cache'owanie zależności Yarn
+
+      # Krok 3: Zainstaluj zależności za pomocą Yarn
+      - name: Install dependencies
+        run: yarn install
+
+      # Krok 4: Uruchom testy Cypress
+      - name: Run Cypress tests
+        run: yarn cypress:run  # Uruchom testy w trybie headless
+
+      # (Opcjonalnie) Krok 5: Prześlij wyniki testów jako artefakt
+      - name: Upload test results
+      # Prześlij wyniki nawet jeśli testy zakończą się niepowodzeniem
+        if: always()  
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-results
+          path: |
+            cypress/screenshots
+            cypress/videos
